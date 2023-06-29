@@ -1,46 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_inter.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: falberti <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 17:57:43 by falberti          #+#    #+#             */
-/*   Updated: 2023/06/29 12:49:59 by falberti         ###   ########.fr       */
+/*   Created: 2023/06/29 14:40:04 by falberti          #+#    #+#             */
+/*   Updated: 2023/06/29 15:02:34 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 
-int	ft_atoi(char *str)
+void	ft_inter(char *cset, char *txt)
 {
-	int nb;
-	int i;
-	int minus;
+	int i = 0;
+	int tab[128] = {0};
+
+	while (txt[i])
+	{
+		if(tab[txt[i]] == 0)
+		{
+			tab[txt[i]] = 1;
+		}
+		i++;
+	}
+
+
+
+
 
 	i = 0;
-	nb = 0;
-	minus = 0;
-	while(str[i] && ((str[i] >= 9 && str[i] <= 13) || 
-				str[i] == 32 || str[i] == 43 || str[i] == 45))
+	while (cset[i])
 	{
-		if (str[i] == 45)
-			minus ++;
-		i++;
+		if(tab[cset[i]] == 1)
+		{
+			write(1, &cset[i], 1);
+			tab[cset[i]] = 0;
+		}
+	i++;
 	}
-	while(str[i] && (str[i] >= 48 && str[i] <= 57))
-	{
-		nb = nb * 10 + (str[i] - 48);
-		i++;
-	}
-		if (!(minus % 2 == 0))
-			return (nb * - 1);
-	return (nb);
 }
-int main (void)
+
+int main (int ac, char **av)
 {
-	
-	printf("test: %d", ft_atoi("13fasd122"));
-	
+	ft_inter(av[1], av[2]);
 	return (0);
+
 }

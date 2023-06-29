@@ -1,46 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_revers_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: falberti <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 17:57:43 by falberti          #+#    #+#             */
-/*   Updated: 2023/06/29 12:49:59 by falberti         ###   ########.fr       */
+/*   Created: 2023/06/29 12:48:55 by falberti          #+#    #+#             */
+/*   Updated: 2023/06/29 13:19:03 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	ft_atoi(char *str)
+int	ft_checklen(char *str)
 {
-	int nb;
-	int i;
-	int minus;
+	int	i;
 
 	i = 0;
-	nb = 0;
-	minus = 0;
-	while(str[i] && ((str[i] >= 9 && str[i] <= 13) || 
-				str[i] == 32 || str[i] == 43 || str[i] == 45))
-	{
-		if (str[i] == 45)
-			minus ++;
+	while (str[i])
 		i++;
-	}
-	while(str[i] && (str[i] >= 48 && str[i] <= 57))
-	{
-		nb = nb * 10 + (str[i] - 48);
-		i++;
-	}
-		if (!(minus % 2 == 0))
-			return (nb * - 1);
-	return (nb);
+	return (i - 1);
 }
-int main (void)
+
+void	ft_reverse_str(char *str)
 {
-	
-	printf("test: %d", ft_atoi("13fasd122"));
-	
+	char	temp;
+	int		debut;
+	int		fin;
+
+	debut = 0;
+	fin = ft_checklen(str);
+	while (debut < fin)
+	{
+		temp = str[debut];
+		str[debut] = str[fin];
+		str[fin] = temp;
+		debut++;
+		fin--;
+	}
+}
+
+int	main(void)
+{
+	char str[] = "Bonjour ma caille !";
+
+	ft_reverse_str(str);
+	printf("Test: %s\n", str);
 	return (0);
 }

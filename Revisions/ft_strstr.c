@@ -1,46 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: falberti <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 17:57:43 by falberti          #+#    #+#             */
-/*   Updated: 2023/06/29 12:49:59 by falberti         ###   ########.fr       */
+/*   Created: 2023/06/29 16:44:18 by falberti          #+#    #+#             */
+/*   Updated: 2023/06/29 17:05:14 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	ft_atoi(char *str)
+char *ft_strstr(char *str, char *tofind)
 {
-	int nb;
 	int i;
-	int minus;
-
+	int x;
+	int p;
+	
+	p = 0;
+	x = 0;
 	i = 0;
-	nb = 0;
-	minus = 0;
-	while(str[i] && ((str[i] >= 9 && str[i] <= 13) || 
-				str[i] == 32 || str[i] == 43 || str[i] == 45))
+	while(str[i] && tofind[x])
 	{
-		if (str[i] == 45)
-			minus ++;
+		p = i;
+		while(str[i] == tofind[x])
+		{
+			i++;
+			x++;
+			if(tofind[x] == '\0')
+				return &str[p];
+		}
 		i++;
 	}
-	while(str[i] && (str[i] >= 48 && str[i] <= 57))
-	{
-		nb = nb * 10 + (str[i] - 48);
-		i++;
-	}
-		if (!(minus % 2 == 0))
-			return (nb * - 1);
-	return (nb);
+	return (NULL);
 }
+
 int main (void)
 {
-	
-	printf("test: %d", ft_atoi("13fasd122"));
-	
+	char str[] = "Salut, ca va canard?";
+	char tofind[] = "can";
+	printf("test: %s\n", ft_strstr(str, tofind));
 	return (0);
 }

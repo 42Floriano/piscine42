@@ -1,46 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: falberti <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 17:57:43 by falberti          #+#    #+#             */
-/*   Updated: 2023/06/29 12:49:59 by falberti         ###   ########.fr       */
+/*   Created: 2023/06/29 13:21:31 by falberti          #+#    #+#             */
+/*   Updated: 2023/06/29 13:38:46 by falberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-int	ft_atoi(char *str)
+char	*ft_strdup(char *str)
 {
-	int nb;
-	int i;
-	int minus;
+	int		i;
+	int		size;
+	char	*copy;
 
 	i = 0;
-	nb = 0;
-	minus = 0;
-	while(str[i] && ((str[i] >= 9 && str[i] <= 13) || 
-				str[i] == 32 || str[i] == 43 || str[i] == 45))
+	size = 0;
+	while (str[size])
+		size++;
+	copy = malloc(sizeof(char) * (size + 1));
+	while (i < size)
 	{
-		if (str[i] == 45)
-			minus ++;
+		copy[i] = str[i];
 		i++;
 	}
-	while(str[i] && (str[i] >= 48 && str[i] <= 57))
-	{
-		nb = nb * 10 + (str[i] - 48);
-		i++;
-	}
-		if (!(minus % 2 == 0))
-			return (nb * - 1);
-	return (nb);
+	copy[i] = '\0';
+	return (copy);
 }
-int main (void)
+
+int	main(void)
 {
-	
-	printf("test: %d", ft_atoi("13fasd122"));
-	
-	return (0);
+	char	str[] = "coucou";
+
+	printf("test: %s\n", ft_strdup(str));
+	return (0);	
 }
