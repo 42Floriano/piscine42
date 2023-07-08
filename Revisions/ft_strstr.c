@@ -24,6 +24,7 @@ char *ft_strstr(char *str, char *tofind)
 	while(str[i] && tofind[x])
 	{
 		p = i;
+		x = 0;
 		while(str[i] == tofind[x])
 		{
 			i++;

@@ -19,9 +19,9 @@ void	ft_inter(char *cset, char *txt)
 
 	while (txt[i])
 	{
-		if(tab[txt[i]] == 0)
+		if(tab[(int)txt[i]] == 0)
 		{
-			tab[txt[i]] = 1;
+			tab[(int)txt[i]] = 1;
 		}
 		i++;
 	}
@@ -33,10 +33,10 @@ void	ft_inter(char *cset, char *txt)
 	i = 0;
 	while (cset[i])
 	{
-		if(tab[cset[i]] == 1)
+		if(tab[(int)cset[i]] == 1)
 		{
 			write(1, &cset[i], 1);
-			tab[cset[i]] = 0;
+			tab[(int)cset[i]] = 0;
 		}
 	i++;
 	}
@@ -44,6 +44,7 @@ void	ft_inter(char *cset, char *txt)
 
 int main (int ac, char **av)
 {
+	(void) ac;
 	ft_inter(av[1], av[2]);
 	return (0);
 
